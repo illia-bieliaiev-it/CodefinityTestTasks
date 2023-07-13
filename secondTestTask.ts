@@ -185,33 +185,3 @@ mount('none', '/proc', 'proc', 0, '');
 
 // Run the command
 runCommand('printenv');
-
-/*Run the Command.The final step is to actually run the specified command inside our new environment.*/
-
-function runCommand(command: string): void {
-    // Pseudo function to run a command
-    runCmd(command);
-}
-
-// 9) Putting it all together. The final version of the program would look something like this.
-
-// Isolate the filesystem
-extractTarball('/path/to/image.tar', '/path/to/container');
-
-// Create new namespaces
-unshare('CLONE_NEWUTS');
-clone('CLONE_NEWPID');
-setNs('/proc/self/ns/net', 'CLONE_NEWNET');
-mount('none', '/proc', 'proc', 0, '');
-
-// Create cgroups
-cgroupsCpuset(1, 1024);  // limit to one CPU and 1GB of RAM
-
-// Isolate the filesystem mount points
-mount('none', '/path/to/container', '', MS_BIND | MS_REC, '');
-chroot('/path/to/container');
-mount('none', '/', 'tmpfs', MS_REC | MS_PRIVATE, '');
-mount('none', '/proc', 'proc', 0, '');
-
-// Run the command
-runCommand('printenv');
