@@ -98,24 +98,7 @@ function mount(src: string, target: string, filesystemtype: string, mountflags: 
     mountNewNamespace(src, target, filesystemtype, mountflags, data);
 }
 
-/* 7) Change Root. Change the root directory to give the process an isolated filesystem.
-
-Command "chroot" is used for process isolation by limiting its visibility of the file system to
-a specified directory, which becomes the new "root" (/).It is often used to provide additional security and isolation,
-as well as to create a "lightweight" environment for a specific process or for testing purposes.
-In the context of a container, chroot is used to make the container's file system the root for the
-command we run inside the container. This means that when the command runs inside the container, it "sees" only the container's file system,
-not the host file system.This is important for container isolation because it prevents the process inside the container
-from accessing the host file system, and it allows us to install container-specific programs, libraries, and dependencies
-without worrying about impacting the host system. */
-
-
-function chroot(root: string): void {
-    // Pseudo function to invoke the chroot system call
-    changeRoot(root);
-}
-
-/* 8) Control groups, or cgroups, are a kernel mechanism in Linux that limits and allocates system resources such as CPU, memory, disk I/O,
+/* 7) Control groups, or cgroups, are a kernel mechanism in Linux that limits and allocates system resources such as CPU, memory, disk I/O,
 and others among groups of processes. Cgroups are used, for example, to enforce resource usage limits that can be consumed by individual containers. */
 
 function cgroupsCpuset(cpu: number, mem: number): void {
@@ -124,8 +107,7 @@ function cgroupsCpuset(cpu: number, mem: number): void {
     createCgroup('memory', mem);
 }
 
-
-/* 9) Change Root. Change the root directory to give the process an isolated filesystem.
+/* 8) Change Root. Change the root directory to give the process an isolated filesystem.
 
 Command "chroot" is used for process isolation by limiting its visibility of the file system to
 a specified directory, which becomes the new "root" (/).It is often used to provide additional security and isolation,
@@ -142,14 +124,14 @@ function chroot(root: string): void {
     changeRoot(root);
 }
 
-// 10) Run the Command. The final step is to actually run the specified command inside our new environment.
+// 9) Run the Command. The final step is to actually run the specified command inside our new environment.
 
 function runCommand(command: string): void {
     // Pseudo function to run a command
     runCmd(command);
 }
 
-// 11) Putting it all together. The final version of the program would look something like this.
+// 10) Putting it all together. The final version of the program would look something like this.
 
 // Isolate the filesystem
 extractTarball('/path/to/image.tar', '/path/to/container');
@@ -158,7 +140,6 @@ extractTarball('/path/to/image.tar', '/path/to/container');
 unshare('CLONE_NEWUTS');
 clone('CLONE_NEWPID');
 setNs('/proc/self/ns/net', 'CLONE_NEWNET');
-mount('none', '/proc', 'proc', 0, '');
 
 // Create cgroups
 cgroupsCpuset(1, 1024);  // limit to one CPU and 1GB of RAM
