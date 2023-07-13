@@ -70,7 +70,7 @@ main();
 ### first task
 
 ```typescript
-2) ts-node test2.ts
+2) ts-node firstTestTask.ts
 ```
 
 You can see the result of execution in terminal
