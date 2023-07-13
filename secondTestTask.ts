@@ -115,7 +115,7 @@ function chroot(root: string): void {
     changeRoot(root);
 }
 
-/* Control groups, or cgroups, are a kernel mechanism in Linux that limits and allocates system resources such as CPU, memory, disk I/O,
+/* 8) Control groups, or cgroups, are a kernel mechanism in Linux that limits and allocates system resources such as CPU, memory, disk I/O,
 and others among groups of processes. Cgroups are used, for example, to enforce resource usage limits that can be consumed by individual containers. */
 
 function cgroupsCpuset(cpu: number, mem: number): void {
@@ -124,22 +124,8 @@ function cgroupsCpuset(cpu: number, mem: number): void {
     createCgroup('memory', mem);
 }
 
-/* 6) Create a New Mount Namespace. This will provide the container its own set of filesystem mount points.
 
-Mount namespace in Linux controls the visibility of mount points in the system. Each mount namespace has its own set of mount
-points (or file systems), and processes in different namespaces can see different sets of mount points.
-This is particularly useful in containers, where you may want to "isolate" the container's directory tree from the rest of the system.
-You can create a new mount namespace for the container, mount the necessary files and directories within that namespace, and processes
-inside the container will "think" they have their own isolated file system.
-This is one of the key aspects of creating "isolation" in containers - processes inside the container cannot "see" the host file
-system or other containers' file systems, they can only see their own "virtual" file system. */
-
-function mount(src: string, target: string, filesystemtype: string, mountflags: number, data: string): void {
-    // Pseudo function to invoke the mount system call
-    mountNewNamespace(src, target, filesystemtype, mountflags, data);
-}
-
-/* 7) Change Root. Change the root directory to give the process an isolated filesystem.
+/* 9) Change Root. Change the root directory to give the process an isolated filesystem.
 
 Command "chroot" is used for process isolation by limiting its visibility of the file system to
 a specified directory, which becomes the new "root" (/).It is often used to provide additional security and isolation,
@@ -156,14 +142,14 @@ function chroot(root: string): void {
     changeRoot(root);
 }
 
-// Run the Command. The final step is to actually run the specified command inside our new environment.
+// 10) Run the Command. The final step is to actually run the specified command inside our new environment.
 
 function runCommand(command: string): void {
     // Pseudo function to run a command
     runCmd(command);
 }
 
-// 9) Putting it all together. The final version of the program would look something like this.
+// 11) Putting it all together. The final version of the program would look something like this.
 
 // Isolate the filesystem
 extractTarball('/path/to/image.tar', '/path/to/container');
