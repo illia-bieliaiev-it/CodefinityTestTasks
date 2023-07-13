@@ -6,6 +6,7 @@
 ❗️Make your code as extensible and flexible as possible.❗️
 Emphasis on the last sentence. The answer can be a .go file.
 
+
 ## The second task description:
 
 /** 
@@ -58,3 +59,24 @@ main();
 ```
 
 (Deadline for tasks is absent)
+
+
+## Installation and execution
+
+```typescript
+1) sudo npm install
+```
+
+### first task
+
+```typescript
+2) ts-node test2.ts
+```
+
+You can see the result of execution in terminal
+
+### second task
+
+Second task is written as high-level algorithm, pseudocode.
+So, unfortunately, it can't be executed. But you can read all written by me comments
+to find out how containerization works :)

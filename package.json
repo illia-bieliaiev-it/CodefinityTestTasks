@@ -5,12 +5,17 @@
   "main": "firstTestTask.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/illia-bieliaiev-it/CodefinityTestTasks.git"
+    "url": "https://github.com/illia-bieliaiev-it/CodefinityTestTasks.git"
   },
   "author": "illia-bieliaiev",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/illia-bieliaiev-it/CodefinityTestTasks/issues"
   },
-  "homepage": "https://github.com/illia-bieliaiev-it/CodefinityTestTasks#readme"
+  "homepage": "https://github.com/illia-bieliaiev-it/CodefinityTestTasks#readme",
+  "dependencies": {
+    "@types/node": "^20.4.2",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.6"
+  }
 }
